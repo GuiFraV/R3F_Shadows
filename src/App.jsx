@@ -1,4 +1,9 @@
-import { ContactShadows, OrbitControls } from "@react-three/drei";
+import {
+  AccumulativeShadows,
+  ContactShadows,
+  OrbitControls,
+  RandomizedLight,
+} from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useControls } from "leva";
 
@@ -8,15 +13,30 @@ function App() {
   });
   return (
     <>
-      <Canvas camera={{ position: [0, 3, 3] }}>
-        <ContactShadows
-          frame={1}
-          position-y={-0.49}
-          opacity={0.5}
-          blur={2}
-          color={"pink"}
-          scale={10}
-        />
+      <Canvas camera={{ position: [0, 3, 3] }} shadows>
+        <AccumulativeShadows
+          temporal
+          frames={35}
+          alphaTest={0.85}
+          scale={5}
+          position={[0, -0.499, 0]}
+          color={"EFBD4E"}
+        >
+          <RandomizedLight
+            amount={4}
+            radius={9}
+            intensity={0.55}
+            ambient={0.25}
+            position={[5, 5, -10]}
+          />
+          <RandomizedLight
+            amount={4}
+            radius={9}
+            intensity={0.25}
+            ambient={0.55}
+            position={[-5, 5, -9]}
+          />
+        </AccumulativeShadows>
         <OrbitControls />
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={0.5} castShadow />
