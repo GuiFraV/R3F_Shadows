@@ -1,4 +1,4 @@
-import { OrbitControls, SoftShadows } from "@react-three/drei";
+import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useControls } from "leva";
 
@@ -8,8 +8,15 @@ function App() {
   });
   return (
     <>
-      <Canvas camera={{ position: [0, 3, 3] }} shadows>
-        <SoftShadows />
+      <Canvas camera={{ position: [0, 3, 3] }}>
+        <ContactShadows
+          frame={1}
+          position-y={-0.49}
+          opacity={0.5}
+          blur={2}
+          color={"pink"}
+          scale={10}
+        />
         <OrbitControls />
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} intensity={0.5} castShadow />
